@@ -2,11 +2,13 @@
 
 d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then(function(data){ 
    
+    // show data in console
     console.log(data);
 
     // Create an array of each id name
     let ids = data.names;
     var selecter = d3.select('#selDataset')
+    
     // Append an option in the dropdown
     ids.forEach(function(id) {
         selecter
@@ -14,28 +16,39 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
         .text(id)
         .property('value', id)
         });
-
+    
+    // show id in console
     console.log(id);
 
+    // create variable to hold only first id 
     var id = ids[0]
     graphs(id);
     demographics(id);
 
 });
-
+    // create graphs function and pass in id variable 
     function graphs(id) {
     
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
     
+    // create variable for all samples
     var samplesAll = data.samples;
 
+    // filter samples based on id 
     var samplesFiltered = samplesAll.filter(var1=> var1.id == id);
+
+    // show filtered sampels in console 
     console.log(samplesFiltered)
+
+    // select first item from filtered object 
     var samplesSelect = samplesFiltered[0];
+
     // Create arrays for sample_values, OTU ids, and OTU labels        
     var sample_values = samplesSelect.sample_values;
     var otu_ids = samplesSelect.otu_ids;
     var otu_labels = samplesSelect.otu_labels;
+
+    // show array in console
     console.log(sample_values);
 
     // sort values to get values highest to lowest
@@ -50,21 +63,15 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
      let labels_10 = otu_labels.slice(0,10).reverse();
      console.log(labels_10);
 
+    //  create first graph 
     let trace1 = {
-    // .map(function(item) {return item.Name })
         x: values_10,
         y: ids_10,
         text: labels_10,
         type: "bar",
         orientation : 'h',
         width: .75,
-        // transforms: [{
-        //     type: 'sort',
-        //     target: 'y',
-        //     order: 'descending',
-        //   }],
         }
-        
     
     let traceData = [trace1];
                 
@@ -75,8 +82,8 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
     // Render the plot to the div tag with id "plot"
     Plotly.newPlot("bar", traceData, layout);
 
+    // create second graph 
     let trace2 = {
-        // .map(function(item) {return item.Name })
             x: otu_ids,
             y: sample_values,
             mode: 'markers',
@@ -98,7 +105,7 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
 
 });}
 
-
+    // create demographics function and pass in id 
     function demographics(id) {
 
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
@@ -109,7 +116,8 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
 
     // demographic info 
     let demoInfo = sampleMetadata.data(d3.entries(firstID))
-    // Getting the key and value in pairs
+
+    // Get the key and value in pairs for the chart 
     console.log(demoInfo);
         demoInfo.enter()
                 .append('h1')
@@ -118,7 +126,7 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
                 .style('font-size','13px');
     });}
 
-// Function called by DOM changes
+// Function when id number is changed in dropdown 
 function optionChanged(newid) {
 
     graphs(newid);
