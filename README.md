@@ -1,6 +1,6 @@
 # Belly Button Biodiversity 
 
-https://bmilne64.github.io/belly-button-challenge/
+https://bmilne64.github.io/Belly-Button-Biodiversity/
 
 In this project, I built an interactive dashboard to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
 
