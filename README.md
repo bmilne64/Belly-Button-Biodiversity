@@ -1,11 +1,44 @@
-# Belly Button Biodiversity 
+## Belly Button Biodiversity 
 
-https://bmilne64.github.io/Belly-Button-Biodiversity/
+![](images/screen_view.png)
 
-In this project, I built an interactive dashboard to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
+Full-Stack Data Analysis to build an interactive dashboard exploring the Belly Button Biodiversity Dataset, which catalogs the microbes that colonize human navels, using Plotly.js and Flask
 
-First, I used the D3 library to read in samples.json from the URL. 
+### Dataset:
 
-Then, I created a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual (ID number) and a bubble chart that displays each sample.
+ [Belly Button Biodiversity DataSet](http://robdunnlab.com/projects/belly-button-biodiversity/).
 
-Finally, I displayed the sample metadata, i.e., an individual's demographic information as key-value pairs in a chart on the page. 
+## Objectives
+
+### Step 1 - Plotly.js
+
+Use Plotly.js to build interactive charts for the dashboard
+
+* Use the D3 library to read in samples.json from the URL. 
+
+* Create a Bar Chart that uses data from the samples.json to display the top 10 samples
+    * Use `sample_values` as the values for the Bar Chart
+    * Use `otu_ids` as the labels for the Bar Chart
+    * Use `otu_labels` as the hovertext for the Bar Chart
+
+![](images/bar_chart.png)
+
+* Create a Bubble Chart that uses data from the samples.json to display each sample
+    * Use `otu_ids` for the x values
+    * Use `sample_values` for the y values
+    * Use `sample_values` for the marker size
+    * Use `otu_ids` for the marker colors
+    * Use `otu_labels` for the text values
+
+![](images/bubble_chart.png)
+
+* Display the sample metadata from the route `/metadata/<sample>`
+    * Display each key/value pair from the metadata JSON object on the top left of the page
+
+* Update all of the plots any time that a new sample is selected
+
+![](images/demographics.png)
+
+---------------------------------------------------
+
+<b>Contact:</b> bronwynmilne64@gmail.com
